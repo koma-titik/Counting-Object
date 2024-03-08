@@ -7,35 +7,43 @@ using TMPro;
 
 public class Counter : MonoBehaviour
 {
-    public TextMeshProUGUI CounterText;
-    public TextMeshProUGUI score;
+    [Header("UI Elements")]
+    [SerializeField] private TextMeshProUGUI _counterText;
+    [SerializeField] private TextMeshProUGUI _score;
 
-    private int scoreValue;
-    private int countApple = 0;
-    private int countPear = 0;
-    private int countSandwich = 0;
-    private int appleValue = 10;
-    private int pearValue = 15;
-    private int sandwichValue = 20;
+    [Header("Score Value")]
+    private int _scoreValue;
+
+    [Header("Item Count")]
+    [SerializeField] private int _countApple;
+    [SerializeField] private int _countPear;
+    [SerializeField] private int _countSandwich;
+
+    [Header("Item Values")]
+    [SerializeField] private int _appleValue;
+    [SerializeField] private int _pearValue;
+    [SerializeField] private int _sandwichValue;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Apple"))
         {
-            countApple++;
+            _countApple++;
         }
+
         else if (other.CompareTag("Pear"))
         {
-            countPear++;
+            _countPear++;
         }
+
         else if (other.CompareTag("Sandwich"))
         {
-            countSandwich++;
-
+            _countSandwich++;
         }
-        int totalItems = (countApple * appleValue) + (pearValue * countPear) + (sandwichValue * countSandwich);
 
-        CounterText.SetText($"Apples: {countApple} Pears: {countPear} Sandwiches: {countSandwich}");
-        score.SetText($"Score: {totalItems}");
+        int totalItems = (_countApple * _appleValue) + (_pearValue * _countPear) + (_sandwichValue * _countSandwich);
+
+        _counterText.SetText($"Apples: {_countApple} Pears: {_countPear} Sandwiches: {_countSandwich}");
+        _score.SetText($"Score: {totalItems}");
     }
 }
